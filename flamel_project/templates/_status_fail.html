@@ -2,13 +2,13 @@
     <h2 class="text-center text-danger mb-4">❌ Transmutação Falhou</h2>
     
     {% if documento %}
-        <p class="text-center text-light">Tarefa #{{ documento.id }} falhou.</p>
+        <p class="text-center text-light">Ocorreu um erro ao processar o documento. Tente novamente mais tarde.</p>
         <div class="alert alert-dark mt-3" role="alert">
             Detalhes do Erro: <br>
             <small>{{ documento.log_processamento|default:"Nenhum log disponível." }}</small>
         </div>
     {% else %}
-        <p class="text-center text-light">Tarefa não encontrada ou erro desconhecido: {{ error_msg }}</p>
+        <p class="text-center text-light">Erro desconhecido. Por favor, tente novamente.</p>
     {% endif %}
 
     <div class="d-flex justify-content-center mt-5">
