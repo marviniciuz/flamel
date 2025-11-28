@@ -9,7 +9,6 @@
 <p class="lead">Selecione a transmutação desejada para seu documento PDF:</p>
 
 <div id="content-area">
-
     <button class="btn btn-lg btn-success w-100 mb-3"
             hx-get="{% url 'upload_file' %}?mode=MELHORAR_PDF"
             hx-target="#content-area"
@@ -30,5 +29,6 @@
             hx-swap="outerHTML">
         3° Transformar PDF em Áudio (TTS)
     </button>
+
 </div>
 {% endblock content %}
