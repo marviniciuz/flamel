@@ -2,13 +2,13 @@
 
     <h2 class="text-center text-success mb-4">✅ Transmutação Concluída!</h2>
     <p class="text-center text-light">Seu arquivo está pronto para ser baixado.</p>
-    
+
     <div class="d-flex flex-column align-items-center mt-5">
         
         <a href="{% url 'download_file' file_id=documento.id %}" 
            class="btn btn-primary btn-lg mb-4" 
            role="button">
-            Baixar Arquivo ({{ documento.tipo_transfomacao }})
+            Baixar Arquivo
         </a>
 
         <button type="button" 
