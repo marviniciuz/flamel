@@ -7,28 +7,26 @@
 </div>
 
 <p class="lead">Selecione a transmutação desejada para seu documento PDF:</p>
-
 <div id="content-area">
-    <button class="btn btn-lg btn-success w-100 mb-3"
+    <button class="btn btn-lg btn-danger w-100 mb-3"
             hx-get="{% url 'upload_file' %}?mode=MELHORAR_PDF"
             hx-target="#content-area"
-            hx-swap="outerHTML">
+            hx-swap="innerHTML"> 
         1° Melhorar PDF (Aumentar Legibilidade)
     </button>
 
     <button class="btn btn-lg btn-warning w-100 mb-3"
             hx-get="{% url 'upload_file' %}?mode=EXTRAIR_TEXTO"
             hx-target="#content-area"
-            hx-swap="outerHTML">
+            hx-swap="innerHTML">
         2° Transformar PDF em Texto (Transcrição OCR)
     </button>
 
     <button class="btn btn-lg btn-info w-100"
             hx-get="{% url 'upload_file' %}?mode=TRANSFORMAR_AUDIO"
             hx-target="#content-area"
-            hx-swap="outerHTML">
+            hx-swap="innerHTML">
         3° Transformar PDF em Áudio (TTS)
     </button>
-
 </div>
 {% endblock content %}
