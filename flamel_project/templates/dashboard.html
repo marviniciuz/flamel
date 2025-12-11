@@ -1,32 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-5">
-    <h1>Dashboard Flamel</h1>
+
+<!-- Botão Sair Fixo -->
+<div class="d-flex justify-content-end mb-4">
     <a href="/login/" class="btn btn-outline-danger btn-sm">Sair do App</a>
 </div>
 
-<p class="lead">Selecione a transmutação desejada para seu documento PDF:</p>
+<!-- Título e Instrução Fixos (Fora do content-area para não sumir/duplicar) -->
+<h1 class="mb-3">Dashboard Flamel</h1>
+<p class="lead mb-5">Selecione a transmutação desejada para seu documento PDF:</p>
+
+<!-- ALVO HTMX: O conteúdo aqui será substituído pelos formulários -->
 <div id="content-area">
-    <button class="btn btn-lg btn-danger w-100 mb-3"
-            hx-get="{% url 'upload_file' %}?mode=MELHORAR_PDF"
-            hx-target="#content-area"
-            hx-swap="innerHTML"> 
-        1° Melhorar PDF (Aumentar Legibilidade)
-    </button>
+    
+    <!-- Botões de Ação Iniciais -->
+    <div class="d-grid gap-3">
+        <button class="btn btn-lg btn-danger"
+                hx-get="{% url 'upload_file' %}?mode=MELHORAR_PDF"
+                hx-target="#content-area"
+                hx-swap="innerHTML"> 
+            1° Melhorar PDF (Aumentar Legibilidade)
+        </button>
 
-    <button class="btn btn-lg btn-warning w-100 mb-3"
-            hx-get="{% url 'upload_file' %}?mode=EXTRAIR_TEXTO"
-            hx-target="#content-area"
-            hx-swap="innerHTML">
-        2° Transformar PDF em Texto (Transcrição OCR)
-    </button>
+        <button class="btn btn-lg btn-warning"
+                hx-get="{% url 'upload_file' %}?mode=EXTRAIR_TEXTO"
+                hx-target="#content-area"
+                hx-swap="innerHTML">
+            2° Transformar PDF em Texto (Transcrição OCR)
+        </button>
 
-    <button class="btn btn-lg btn-info w-100"
-            hx-get="{% url 'upload_file' %}?mode=TRANSFORMAR_AUDIO"
-            hx-target="#content-area"
-            hx-swap="innerHTML">
-        3° Transformar PDF em Áudio (TTS)
-    </button>
+        <button class="btn btn-lg btn-info"
+                hx-get="{% url 'upload_file' %}?mode=TRANSFORMAR_AUDIO"
+                hx-target="#content-area"
+                hx-swap="innerHTML">
+            3° Transformar PDF em Áudio (TTS)
+        </button>
+    </div>
+
 </div>
+
+<!-- Script para restaurar o estado inicial ao clicar em "Voltar" -->
+<script>
+    document.body.addEventListener('htmx:afterSwap', function(evt) {
+        if (evt.detail.target.id === 'content-area' && evt.detail.xhr.responseURL.includes('dashboard')) {
+            // Lógica opcional se precisar limpar algo específico
+        }
+    });
+</script>
+
 {% endblock content %}

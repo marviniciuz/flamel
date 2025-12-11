@@ -1,22 +1,23 @@
-<div id="task-status-area" 
-     hx-get="{% url 'task_status' task_id=documento.task_id %}"
-     hx-trigger="load delay:500ms, every 3s" 
-     hx-swap="outerHTML">
-    
-    <h2 class="text-center text-warning mb-4">Processamento em Andamento...</h2>
-    <div class="d-flex justify-content-center">
-        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-            <span class="visually-hidden">Loading...</span>
+<!-- Adicionei a div content-area para manter o padrão do seu download.html -->
+<div id="content-area">
+    <div id="task-status-area" 
+         hx-get="{% url 'task_status' task_id=documento.task_id %}"
+         hx-trigger="load delay:500ms, every 3s" 
+         hx-swap="outerHTML">
+        
+        <h2 class="text-center text-warning mb-4">Processamento em Andamento...</h2>
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     </div>
-    </div>
+
     <div class="d-flex justify-content-center mt-5">
-        <button type="button" 
-                class="btn btn-outline-secondary"
-                hx-get="{% url 'dashboard' %}"
-                hx-target="#content-area"
-                hx-swap="outerHTML">
-            &larr; Voltar
+        <!-- Exemplo para upload.html e download.html -->
+<a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+    &larr; Voltar
+</a>
         </button>
     </div>
 </div>
