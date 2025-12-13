@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.section {
+    margin-top: 5rem;
+}
+
+/* Utilitário para esconder (usado internamente se precisar) */
+.hide {
+    display: none !important;
+}
+
+/* Cartões Interativos */
+.card.hoverable {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card.hoverable:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* Área de Dropzone */
+#dropzone {
+    padding: 60px;
+    border: 2px dashed #9e9e9e;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+}
+
+#dropzone:hover {
+    background-color: #eeeeee;
+}
+
+#dropzone.dragover {
+    background-color: #e0e0e0;
+    border-color: #2196F3;
+}
+
+/* Ajuste de ícones */
+.material-icons.large {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
