@@ -1,23 +1,25 @@
-<div id="content-area">
-    <h2 class="text-center text-danger mb-4">❌ Transmutação Falhou</h2>
-    
-    {% if documento %}
-        <p class="text-center text-light">Ocorreu um erro ao processar o documento. Tente novamente mais tarde.</p>
-        <div class="alert alert-dark mt-3" role="alert">
-            Detalhes do Erro: <br>
-            <small>{{ documento.log_processamento|default:"Nenhum log disponível." }}</small>
+<div class="col s12 m8 offset-m2">
+    <div class="card-panel center-align z-depth-2 hoverable">
+        <h4 class="red-text text-accent-4">Ops! Algo deu errado.</h4>
+        
+        <div style="margin: 2rem 0;">
+            <i class="material-icons large red-text text-accent-4">error_outline</i>
         </div>
-    {% else %}
-        <p class="text-center text-light">Erro desconhecido. Por favor, tente novamente.</p>
-    {% endif %}
-
-    <div class="d-flex justify-content-center mt-5">
-        <button type="button" 
-                class="btn btn-outline-secondary"
-                hx-get="{% url 'dashboard' %}"
-                hx-target="#content-area"
-                hx-swap="outerHTML">
-            &larr; Tentar Outra Transmutação
-        </button>
+        
+        <p class="grey-text text-darken-1 flow-text">
+            Não foi possível processar seu documento.
+        </p>
+        
+        {% if documento.log_processamento %}
+            <div class="card-panel red lighten-5 left-align" style="margin-top: 20px;">
+            </div>
+        {% endif %}
+        
+        <br><br>
+        
+        <!-- Botão Voltar (Link Direto) -->
+        <a href="/" class="btn-large grey waves-effect waves-light">
+            <i class="material-icons left">arrow_back</i>Tentar Novamente
+        </a>
     </div>
 </div>

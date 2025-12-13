@@ -1,23 +1,21 @@
-<!-- Adicionei a div content-area para manter o padrão do seu download.html -->
-<div id="content-area">
-    <div id="task-status-area" 
-         hx-get="{% url 'task_status' task_id=documento.task_id %}"
-         hx-trigger="load delay:500ms, every 3s" 
-         hx-swap="outerHTML">
-        
-        <h2 class="text-center text-warning mb-4">Processamento em Andamento...</h2>
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+<div id="tela-carregando" class="section center-align"
+     hx-get="{% url 'task_status' task_id=documento.task_id %}"
+     hx-trigger="load delay:3s" 
+     hx-swap="outerHTML">
+    
+    <h4>Processando...</h4>
+    
+    <div class="preloader-wrapper big active" style="margin: 3rem 0;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left"><div class="circle"></div></div>
+            <div class="gap-patch"><div class="circle"></div></div>
+            <div class="circle-clipper right"><div class="circle"></div></div>
         </div>
     </div>
-
-    <div class="d-flex justify-content-center mt-5">
-        <!-- Exemplo para upload.html e download.html -->
-<a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
-    &larr; Voltar
-</a>
-        </button>
-    </div>
+    
+    <p class="grey-text">Estamos trabalhando no seu arquivo...</p>
+    
+    <br><br>
+    <!-- Botão Cancelar/Voltar (Link limpo) -->
+    <a href="/" class="btn grey waves-effect">Cancelar</a>
 </div>

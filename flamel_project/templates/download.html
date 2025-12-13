@@ -1,23 +1,21 @@
-<div id="content-area">
-
-    <h2 class="text-center text-success mb-4">✅ Transmutação Concluída!</h2>
-    <p class="text-center text-light">Seu arquivo está pronto para ser baixado.</p>
-
-    <div class="d-flex flex-column align-items-center mt-5">
-        
-        <a href="{% url 'download_file' file_id=documento.id %}" 
-           class="btn btn-primary btn-lg mb-4" 
-           role="button">
-            Baixar Arquivo
-        </a>
-
-        <button type="button" 
-                class="btn btn-outline-secondary"
-                hx-get="{% url 'dashboard' %}"
-                hx-target="#content-area"
-                hx-swap="outerHTML">
-            &larr; Voltar
-        </button>
+<div id="tela-download" class="section center-align">
+    <h4>Arquivo pronto!</h4>
+    
+    <div style="margin: 2rem 0;">
+        <i class="material-icons large green-text">check_circle</i>
     </div>
     
+    <p class="flow-text grey-text text-darken-1">Seu PDF foi processado com sucesso.</p>
+    
+    <br>
+    
+    <!-- Link de Download Real -->
+    <a href="{% url 'download_file' file_id=documento.id %}" class="btn-large green waves-effect waves-light pulse">
+        <i class="material-icons left">file_download</i>Baixar Arquivo
+    </a>
+    
+    <br><br><br>
+    
+    <!-- Botão Voltar (Link limpo) -->
+    <a href="/" class="btn grey waves-effect">Voltar ao Início</a>
 </div>

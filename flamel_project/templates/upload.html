@@ -1,42 +1,36 @@
-<p class="text-secondary">Arraste e solte o seu arquivo PDF para iniciar a transmutação.</p>
+<div id="tela-transformar" class="section center-align">
+    <h4>Arraste o arquivo PDF</h4>
+    {% if errors %}
+        <div class="card-panel red lighten-4 red-text">Erro no upload. Tente novamente.</div>
+    {% endif %}
 
-{% if errors %}
-    <div class="alert alert-danger" role="alert">
-        Houve um erro no upload:
-        <ul>
-        {% for field, error_list in errors.items %}
-            <li>{{ field }}: {{ error_list|join:", " }}</li>
-        {% endfor %}
-        </ul>
+    <div class="container">
+        <form hx-post="{% url 'upload_file' %}" 
+              hx-target="#content-area" 
+              hx-swap="innerHTML" 
+              enctype="multipart/form-data">
+            
+            {% csrf_token %}
+            <input type="hidden" name="tipo_transfomacao" value="{{ mode }}">
+
+            <label for="id_arquivo_original" 
+                   id="dropzone" 
+                   class="card-panel grey lighten-3 hoverable" 
+                   style="display: block; cursor: pointer; position: relative;">
+                
+                <i class="material-icons large grey-text">cloud_upload</i>
+                <p class="grey-text text-darken-1" style="font-size: 1rem;">Arraste o arquivo aqui ou clique para enviar</p>
+                
+                <input type="file" name="arquivo_original" id="id_arquivo_original" accept="application/pdf" 
+                       style="opacity: 0; position: absolute; z-index: -1; width: 1px; height: 1px;" required>
+            </label>
+            
+            <br><br>
+            
+            <div class="row">
+                <a href="/" class="btn grey waves-effect left">Voltar</a>
+                <button type="submit" class="btn green waves-effect right">Processar</button>
+            </div>
+        </form>
     </div>
-{% endif %}
-<form hx-post="{% url 'upload_file' %}" 
-      hx-target="#content-area" 
-      hx-swap="innerHTML" 
-      enctype="multipart/form-data">
-    
-    {% csrf_token %}
-
-    <input type="hidden" name="tipo_transfomacao" value="{{ mode }}">
-
-    <div class="mb-3">
-        <label for="id_arquivo_original" class="form-label">Selecione o PDF:</label>
-        <input type="file" 
-               name="arquivo_original" 
-               id="id_arquivo_original" 
-               accept="application/pdf"
-               class="form-control" 
-               required>
-        <div class="form-text text-light-emphasis">Apenas arquivos PDF são aceitos.</div>
-    </div>
-
-    <div class="d-flex justify-content-between mt-4">
-        <!-- Exemplo para upload.html e download.html -->
-<a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
-    &larr; Voltar
-</a>
-        <button type="submit" class="btn btn-primary">
-            Iniciar Transmutação (Processar)
-        </button>
-    </div>
-</form>
+</div>

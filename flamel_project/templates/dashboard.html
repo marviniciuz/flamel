@@ -2,51 +2,56 @@
 
 {% block content %}
 
-<!-- Botão Sair Fixo -->
-<div class="d-flex justify-content-end mb-4">
-    <a href="/login/" class="btn btn-outline-danger btn-sm">Sair do App</a>
-</div>
-
-<!-- Título e Instrução Fixos (Fora do content-area para não sumir/duplicar) -->
-<h1 class="mb-3">Dashboard Flamel</h1>
-<p class="lead mb-5">Selecione a transmutação desejada para seu documento PDF:</p>
-
-<!-- ALVO HTMX: O conteúdo aqui será substituído pelos formulários -->
-<div id="content-area">
+<!-- TUDO que estiver dentro desta DIV será substituído pela próxima tela -->
+<div id="content-area" class="section center-align">
     
-    <!-- Botões de Ação Iniciais -->
-    <div class="d-grid gap-3">
-        <button class="btn btn-lg btn-danger"
-                hx-get="{% url 'upload_file' %}?mode=MELHORAR_PDF"
-                hx-target="#content-area"
-                hx-swap="innerHTML"> 
-            1° Melhorar PDF (Aumentar Legibilidade)
-        </button>
+    <h4>Dashboard</h4>
+    <p class="grey-text">Selecione uma ferramenta:</p>
+    <br>
 
-        <button class="btn btn-lg btn-warning"
-                hx-get="{% url 'upload_file' %}?mode=EXTRAIR_TEXTO"
-                hx-target="#content-area"
-                hx-swap="innerHTML">
-            2° Transformar PDF em Texto (Transcrição OCR)
-        </button>
+    <div class="row">
+        <!-- Opção 1 -->
+        <div class="col s12 m4">
+            <div class="card hoverable" 
+                 hx-get="{% url 'upload_file' %}?mode=MELHORAR_PDF"
+                 hx-target="#content-area"
+                 hx-swap="innerHTML">
+                <div class="card-content">
+                    <i class="material-icons large teal-text">picture_as_pdf</i>
+                    <p class="card-title grey-text text-darken-4">Melhorar PDF</p>
+                </div>
+            </div>
+        </div>
 
-        <button class="btn btn-lg btn-info"
-                hx-get="{% url 'upload_file' %}?mode=TRANSFORMAR_AUDIO"
-                hx-target="#content-area"
-                hx-swap="innerHTML">
-            3° Transformar PDF em Áudio (TTS)
-        </button>
+        <!-- Opção 2 -->
+        <div class="col s12 m4">
+            <div class="card hoverable"
+                 hx-get="{% url 'upload_file' %}?mode=TRANSFORMAR_AUDIO"
+                 hx-target="#content-area"
+                 hx-swap="innerHTML">
+                <div class="card-content">
+                    <i class="material-icons large cyan-text">hearing</i>
+                    <p class="card-title grey-text text-darken-4">PDF para Áudio</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Opção 3 -->
+        <div class="col s12 m4">
+            <div class="card hoverable"
+                 hx-get="{% url 'upload_file' %}?mode=EXTRAIR_TEXTO"
+                 hx-target="#content-area"
+                 hx-swap="innerHTML">
+                <div class="card-content">
+                    <i class="material-icons large amber-text text-darken-2">description</i>
+                    <p class="card-title grey-text text-darken-4">Extrair Texto</p>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <br>
+    <a href="/login/" class="btn red lighten-1 waves-effect">Sair</a>
+
 </div>
-
-<!-- Script para restaurar o estado inicial ao clicar em "Voltar" -->
-<script>
-    document.body.addEventListener('htmx:afterSwap', function(evt) {
-        if (evt.detail.target.id === 'content-area' && evt.detail.xhr.responseURL.includes('dashboard')) {
-            // Lógica opcional se precisar limpar algo específico
-        }
-    });
-</script>
-
 {% endblock content %}
