@@ -18,9 +18,6 @@ function setupDropzone() {
     if (dropzone.classList.contains('js-dropzone-ready')) return;
     dropzone.classList.add('js-dropzone-ready');
 
-    // --- REMOVIDO O BLOCO DE 'CLICK' (A LABEL JÁ FAZ ISSO) ---
-
-    // --- Eventos Visuais (Drag & Drop) ---
     dropzone.addEventListener('dragover', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -41,14 +38,12 @@ function setupDropzone() {
         dropzone.classList.remove('teal', 'lighten-5');
         dropzone.style.border = "none";
         
-        // Se o usuário arrastou um arquivo, passamos para o input
         if (e.dataTransfer.files.length > 0) {
             fileInput.files = e.dataTransfer.files;
             updateDropzoneUI(fileInput);
         }
     });
 
-    // --- Mudança no Input (quando seleciona arquivo pelo clique) ---
     fileInput.addEventListener('change', () => {
         updateDropzoneUI(fileInput);
     });
